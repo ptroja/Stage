@@ -828,8 +828,8 @@ RaytraceResult World::Raytrace( const Ray& r )
   const double yjumpy( sy * REGIONWIDTH );
 
   // manhattan distance between region crossings in X and Y
-  const double xjumpdist( fabs(xjumpx)+fabs(xjumpy) );
-  const double yjumpdist( fabs(yjumpx)+fabs(yjumpy) );
+  const double xjumpdist( std::abs(xjumpx)+std::abs(xjumpy) );
+  const double yjumpdist( std::abs(yjumpx)+std::abs(yjumpy) );
 
   const unsigned int layer( (updates+1) % 2 );
   
@@ -891,9 +891,9 @@ RaytraceResult World::Raytrace( const Ray& r )
 		      result.color = result.mod->GetColor();
 
 		      if( ax > ay ) // faster than the equivalent hypot() call
-			result.range = fabs((globx-startx) / cosa) / ppm;
+			result.range = std::abs((globx-startx) / cosa) / ppm;
 		      else
-			result.range = fabs((globy-starty) / sina) / ppm;
+			result.range = std::abs((globy-starty) / sina) / ppm;
 
 		      return result;
 		    }				  
@@ -958,8 +958,8 @@ RaytraceResult World::Raytrace( const Ray& r )
 							
 	      // find the distances to the region crossing points
 	      // manhattan distance is faster than using hypot()
-	      distX = fabs(xdx)+fabs(xdy);
-	      distY = fabs(ydx)+fabs(ydy);		  
+	      distX = std::abs(xdx)+std::abs(xdy);
+	      distY = std::abs(ydx)+std::abs(ydy);		  
 	    }
 					
 	  if( distX < distY ) // crossing a region boundary left or right

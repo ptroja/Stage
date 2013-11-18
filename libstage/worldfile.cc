@@ -1418,7 +1418,7 @@ void Worldfile::WriteInt(int entity, const char *name, int value)
 void Worldfile::WriteFloat(int entity, const char *name, double value)
 {
   // compact zeros make the file more readable
-  if( fabs(value) < 0.001 ) // nearly 0
+  if( std::abs(value) < 0.001 ) // nearly 0
     WriteString(entity, name, "0" ); 
   else
     {

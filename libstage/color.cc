@@ -17,10 +17,10 @@ Color::Color() :
 bool Color::operator!=( const Color& other ) const
 {
   double epsilon = 1e-4; // small
-  return( fabs(r-other.r) > epsilon ||
-	  fabs(g-other.g) > epsilon ||
-	  fabs(b-other.b) > epsilon ||
-	  fabs(a-other.a) > epsilon );
+  return( std::abs(r-other.r) > epsilon ||
+	  std::abs(g-other.g) > epsilon ||
+	  std::abs(b-other.b) > epsilon ||
+	  std::abs(a-other.a) > epsilon );
 }
 
 Color::Color( const std::string& name) :

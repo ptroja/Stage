@@ -117,9 +117,9 @@ static bool blob_match( Model* candidate,
 static bool ColorMatchIgnoreAlpha( Color a, Color b )
 {
   double epsilon = 1e-5; // small
-  return( fabs(a.r - b.r) < epsilon &&
-	  fabs(a.g - b.g) < epsilon &&
-	  fabs(a.b - b.b) < epsilon );
+  return( std::abs(a.r - b.r) < epsilon &&
+	  std::abs(a.g - b.g) < epsilon &&
+	  std::abs(a.b - b.b) < epsilon );
 }
 
 void ModelBlobfinder::ModelBlobfinder::AddColor( Color col )

@@ -147,7 +147,7 @@ void ModelFiducial::AddModelIfVisible( Model* him )
 	double bearing = atan2( dy, dx );
 	double dtheta = normalize(bearing - mypose.a);
 
-	if( fabs(dtheta) > fov/2.0 )
+	if( std::abs(dtheta) > fov/2.0 )
 	{
 		//PRINT_DEBUG1( "  but model %s is outside my FOV", him->Token());
 		return;

@@ -66,8 +66,8 @@ using namespace Stg;
 
     @par Details
  
-  - acceleration_bounds [ xmin xmax ymin ymax zmin zmax amin amax ] x,y,z in meters per second squared, a in degrees per second squared  
-- drive "diff", "omni" or "car"\n
+    - acceleration_bounds [ xmin xmax ymin ymax zmin zmax amin amax ] x,y,z in meters per second squared, a in degrees per second squared  
+    - drive "diff", "omni" or "car"\n
     select differential-steer model(like a Pioneer), omnidirectional mode or carlike (velocity and steering angle).
     omega:<float> ]\n Specify the initial velocity of the model. Note
     that if the model hits an obstacle, its velocity will be set to
@@ -445,7 +445,7 @@ void ModelPosition::Update( void  )
 		  double close_enough = 0.02; // fudge factor
 
 		  // if we're at the right spot
-		  if( fabs(x_error) < close_enough && fabs(y_error) < close_enough )
+		  if( std::abs(x_error) < close_enough && std::abs(y_error) < close_enough )
 		    {
 		      PRINT_DEBUG( "TURNING ON THE SPOT" );
 		      // turn on the spot to minimize the error
@@ -467,7 +467,7 @@ void ModelPosition::Update( void  )
 
 		      // if we're pointing about the right direction, move
 		      // forward
-		      if( fabs(a_error) < M_PI/16 )
+		      if( std::abs(a_error) < M_PI/16 )
 			{
 			  PRINT_DEBUG( "DRIVING TOWARDS THE GOAL" );
 			  calc.x = std::min( goal_distance, max_speed_x );
@@ -494,9 +494,9 @@ void ModelPosition::Update( void  )
 		
       // simple model of power consumption
       watts = WATTS + 
-	fabs(vel.x) * WATTS_KGMS * mass + 
-	fabs(vel.y) * WATTS_KGMS * mass + 
-	fabs(vel.a) * WATTS_KGMS * mass;
+	std::abs(vel.x) * WATTS_KGMS * mass + 
+	std::abs(vel.y) * WATTS_KGMS * mass + 
+	std::abs(vel.a) * WATTS_KGMS * mass;
 		
       //PRINT_DEBUG4( "model %s velocity (%.2f %.2f %.2f)",
       //	    this->token, 

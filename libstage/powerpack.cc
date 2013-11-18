@@ -16,10 +16,10 @@ joules_t PowerPack::global_capacity = 0.0;
 joules_t PowerPack::global_dissipated = 0.0;
 
 PowerPack::PowerPack( Model* mod ) :
-  event_vis( 2.0 * std::max( fabs(ceil(mod->GetWorld()->GetExtent().x.max)),
-									  fabs(floor(mod->GetWorld()->GetExtent().x.min))),
-				 2.0 * std::max( fabs(ceil(mod->GetWorld()->GetExtent().y.max)),
-									  fabs(floor(mod->GetWorld()->GetExtent().y.min))), 
+  event_vis( 2.0 * std::max( std::abs(ceil(mod->GetWorld()->GetExtent().x.max)),
+									  std::abs(floor(mod->GetWorld()->GetExtent().x.min))),
+				 2.0 * std::max( std::abs(ceil(mod->GetWorld()->GetExtent().y.max)),
+									  std::abs(floor(mod->GetWorld()->GetExtent().y.min))), 
 				 1.0 ),				 
   output_vis( 0,100,200,40, 1200, Color(1,0,0), Color(0,0,0,0.5), "energy output", "energy_input" ),
   stored_vis( 0,142,200,40, 1200, Color(0,1,0), Color(0,0,0,0.5), "energy stored", "energy_stored" ),
@@ -144,7 +144,7 @@ void PowerPack::Visualize( Camera* cam )
 		last_watts = watts;
 	 }
   
-  if( fabs(watts) > 1e-5 ) // any current
+  if( std::abs(watts) > 1e-5 ) // any current
 	 {
 		glColor4f( 1,0,0,0.8 ); // red
 		char buf[32];

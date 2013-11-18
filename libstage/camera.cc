@@ -171,7 +171,7 @@ void OrthoCamera::scale( double scale, double shift_x, double w, double shift_y,
 	const double old_scale = _scale;
 
 	//TODO setting up the factor can use some work
-	double factor = 1.0 + fabs( to_scale ) / 25;
+	double factor = 1.0 + std::abs( to_scale ) / 25;
 	if( factor < 1.1 )
 		factor = 1.1; //this must be greater than 1.
 	else if( factor > 2.5 )
