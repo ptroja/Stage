@@ -123,7 +123,7 @@ int InterfaceRanger::ProcessMessage(QueuePointer & resp_queue,
       if( hdr->size == 0 )
 	{			 
 	  // the Player ranger config is a little weaker than Stage's
-	  // natice device, so all we can do is warn about this.
+	  // native device, so all we can do is warn about this.
 	  PRINT_WARN( "stageplugin ranger config describes only the first sensor of the ranger." );
 					
 	  player_ranger_config_t prc;
@@ -212,5 +212,3 @@ int InterfaceRanger::ProcessMessage(QueuePointer & resp_queue,
 	       hdr->type, hdr->subtype);
   return(-1);
 }
-
-
