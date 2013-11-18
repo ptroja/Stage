@@ -47,12 +47,12 @@ namespace Stg {
 	 std::vector<int> values;
 
     /// Line this property came from
-    int line;
+    unsigned int line;
 
     /// Flag set if property has been used
     bool used;
 		
-	 CProperty( int entity, const char* name, int line ) :
+	 CProperty( int entity, const char* name, unsigned int line ) :
 		entity(entity), 
 		name(name),
 		values(),
@@ -175,10 +175,10 @@ namespace Stg {
   private: bool SetTokenValue(int index, const char *value);
 
 	 // Get the value of a token
-  private: const char *GetTokenValue(int index);
+  private: const char *GetTokenValue(int index) const;
 
 	 // Dump the token list (for debugging).
-  private: void DumpTokens();
+  private: void DumpTokens() const;
 
 	 // Parse a line
   private: bool ParseTokens();
@@ -227,7 +227,7 @@ namespace Stg {
   public: int GetEntityCount();
 
 	 // Get a entity (returns the entity type value)
-  public: const char *GetEntityType(int entity);
+  public: const char *GetEntityType(int entity) const;
 
 	 // Lookup a entity number by type name
 	 // Returns -1 if there is entity with this type
@@ -238,7 +238,7 @@ namespace Stg {
   public: int GetEntityParent(int entity);
 
 	 // Dump the entity list for debugging
-  private: void DumpEntities();
+  private: void DumpEntities() const;
 
 	 // Clear the property list
   private: void ClearProperties();
@@ -249,7 +249,7 @@ namespace Stg {
   private: void AddPropertyValue( CProperty* property, int index, int value_token);
   
 	 // Get an property
-  public: CProperty* GetProperty(int entity, const char *name);
+  public: CProperty* GetProperty(int entity, const char *name) const;
 
 	 // returns true iff the property exists in the file, so that you can
 	 // be sure that GetProperty() will work

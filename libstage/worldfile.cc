@@ -705,7 +705,7 @@ bool Worldfile::SetTokenValue(int index, const char *value)
 
 ///////////////////////////////////////////////////////////////////////////
 // Get the value of a token
-const char *Worldfile::GetTokenValue(int index)
+const char *Worldfile::GetTokenValue(int index) const
 {
   assert(index >= 0 && index < (int)this->tokens.size());
   return this->tokens[index].value.c_str();
@@ -714,13 +714,13 @@ const char *Worldfile::GetTokenValue(int index)
 
 ///////////////////////////////////////////////////////////////////////////
 // Dump the token list (for debugging).
-void Worldfile::DumpTokens()
+void Worldfile::DumpTokens() const
 {
-  int line;
+  unsigned int line;
 
   line = 1;
   printf("\n## begin tokens\n");
-  printf("## %4d : ", line);
+  printf("## %4u : ", line);
 
 	FOR_EACH( it, tokens )
   //for (int i = 0; i < this->token_count; i++)
@@ -1211,7 +1211,7 @@ int Worldfile::GetEntityParent(int entity)
 
 ///////////////////////////////////////////////////////////////////////////
 // Get a entity (returns the entity type value)
-const char *Worldfile::GetEntityType(int entity)
+const char *Worldfile::GetEntityType(int entity) const
 {
   if (entity < 0 || entity >= (int)this->entities.size())
     return NULL;
@@ -1233,7 +1233,7 @@ int Worldfile::LookupEntity(const char *type)
 }
 
 
-void PrintProp( const char* key, CProperty* prop )
+void PrintProp( const char* key, const CProperty* prop )
 {
   if( prop )
     printf( "Print key %s prop ent %d name %s\n", key, prop->entity, prop->name.c_str() );
@@ -1241,7 +1241,7 @@ void PrintProp( const char* key, CProperty* prop )
 
 ///////////////////////////////////////////////////////////////////////////
 // Dump the entity list for debugging
-void Worldfile::DumpEntities()
+void Worldfile::DumpEntities() const
 {
   printf("\n## begin entities\n");
 
@@ -1295,7 +1295,7 @@ void Worldfile::AddPropertyValue( CProperty* property, int index, int value_toke
 
 ///////////////////////////////////////////////////////////////////////////
 // Get an property
-CProperty* Worldfile::GetProperty(int entity, const char *name)
+CProperty* Worldfile::GetProperty(int entity, const char *name) const
 {
   char key[128];
   snprintf( key, 127, "%d%s", entity, name );
@@ -1309,7 +1309,7 @@ CProperty* Worldfile::GetProperty(int entity, const char *name)
 	 {		
 		strncpy( cache_key, key, 128 ); // remember for next time		
 		
-		std::map<std::string,CProperty*>::iterator it = properties.find( key );	
+		std::map<std::string,CProperty*>::const_iterator it = properties.find( key );
 		if( it == properties.end() ) // not found
 		  cache_property = NULL;
 		else
