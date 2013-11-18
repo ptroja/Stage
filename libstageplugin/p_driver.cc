@@ -145,8 +145,8 @@ The stage plugin driver provides the following device interfaces:
 // CODE ------------------------------------------------------------
 
 #include <unistd.h>
-#include <string.h>
-#include <math.h>
+#include <cstring>
+#include <cmath>
 #include "config.h"
 #include "p_driver.h"
 	     //#include "../libstage/stage.hh"

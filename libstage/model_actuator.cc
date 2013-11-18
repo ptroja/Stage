@@ -13,8 +13,8 @@
 
 
 #include <sys/time.h>
-#include <math.h>
-#include <stdlib.h>
+#include <cmath>
+#include <cstdlib>
 
 //#define DEBUG
 #include "stage.hh"

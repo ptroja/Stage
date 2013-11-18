@@ -34,13 +34,13 @@
  */
 
 #include <unistd.h>
-#include <string.h>
+#include <cstring>
 
 #include <libplayercore/playercore.h>
 
 #include <GLUT/glut.h>
-#include <stdio.h>
-#include <math.h>
+#include <cstdio>
+#include <cmath>
 
 
 GLfloat light0_ambient[] =

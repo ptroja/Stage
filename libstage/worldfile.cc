@@ -27,16 +27,16 @@
  * CVS info: $Id$
  */
 
-#include <assert.h>
-#include <ctype.h>
-#include <errno.h>
-#include <limits.h> // for PATH_MAX
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <cassert>
+#include <cctype>
+#include <cerrno>
+#include <climits> // for PATH_MAX
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
 #include <unistd.h>
-#include <math.h>
-#include <stdarg.h>
+#include <cmath>
+#include <cstdarg>
 
 //#define DEBUG
 

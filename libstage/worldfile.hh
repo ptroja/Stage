@@ -29,7 +29,7 @@
 
 
 #include <stdint.h> // for portable int types eg. uint32_t
-#include <stdio.h> // for FILE ops
+#include <cstdio> // for FILE ops
 
 namespace Stg {
 
@@ -77,7 +77,7 @@ namespace Stg {
   protected: FILE* FileOpen(const std::string& filename, const char* method);
 
 	 // Load world from file
-  public: bool Load(const std::string& filename );
+  public: bool Load(const std::string& filename);
 
     // Save world into named file
   public: bool Save(const std::string& filename);

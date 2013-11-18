@@ -83,11 +83,11 @@
 
 //#define DEBUG 
 
-#include <stdlib.h>
-#include <assert.h>
-#include <string.h> // for strdup(3)
-#include <locale.h> 
-#include <limits.h>
+#include <cstdlib>
+#include <cassert>
+#include <cstring> // for strdup(3)
+#include <clocale> 
+#include <climits>
 #include <libgen.h> // for dirname(3)
 
 #include "stage.hh"

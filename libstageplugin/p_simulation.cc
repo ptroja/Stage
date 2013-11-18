@@ -47,7 +47,7 @@
 
 //#define DEBUG
 
-#include <string.h> // for checking get/set property requests
+#include <cstring> // for checking get/set property requests
 #include <libgen.h> // for dirname(3)
 #include <libplayercore/globals.h> // for player_argc & player_argv
 

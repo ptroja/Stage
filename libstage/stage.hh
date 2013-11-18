@@ -34,11 +34,11 @@
 // C libs
 #include <unistd.h>
 #include <stdint.h> // for portable int types eg. uint32_t
-#include <assert.h>
-#include <stdlib.h>
-#include <stdio.h>
+#include <cassert>
+#include <cstdlib>
+#include <cstdio>
 #include <libgen.h>
-#include <string.h>
+#include <cstring>
 #include <sys/types.h>
 #include <sys/time.h>
 #include <pthread.h> 

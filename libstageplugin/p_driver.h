@@ -2,8 +2,8 @@
 #define _STAGE_PLAYER_DRIVER_H
 
 #include <unistd.h>
-#include <string.h>
-#include <math.h>
+#include <cstring>
+#include <cmath>
 
 #include <libplayercore/playercore.h>
 

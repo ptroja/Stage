@@ -4,7 +4,7 @@ using namespace Stg;
 
 #include "file_manager.hh"
 
-#include <errno.h>
+#include <cerrno>
 
 Color::Color( double r, double g, double b, double a )
   : r(r),g(g),b(b),a(a) 
