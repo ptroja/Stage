@@ -161,7 +161,7 @@ Bounds& Bounds::Load( Worldfile* wf, const int section, const char* keyword )
   return *this;
 }
 
-double Bounds::Constrain( double value )
+double Bounds::Constrain( double value ) const
 {
   return Stg::constrain( value, min, max );
 }

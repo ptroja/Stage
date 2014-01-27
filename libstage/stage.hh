@@ -1,4 +1,3 @@
-
 #ifndef STG_H
 #define STG_H
 /*
@@ -156,7 +155,7 @@ namespace Stg
     while( a < -M_PI ) a += 2.0*M_PI;
     while( a >  M_PI ) a -= 2.0*M_PI;	 
     return a;
-  };
+  }
 	
   /** take binary sign of a, either -1, or 1 if >= 0 */
   inline int sgn( int a){ return( a<0 ? -1 : 1); }
@@ -455,7 +454,7 @@ namespace Stg
     Bounds& Load( Worldfile* wf, int section, const char* keyword );
 
     // returns value, but no smaller than min and no larger than max.
-    double Constrain( double value );
+    double Constrain( double value ) const;
   };
     
   /** Define a three-dimensional bounding box, initialized to zero */
@@ -2021,14 +2020,14 @@ namespace Stg
 
 	 
     const std::string& GetModelType() const {return type;}	 
-    std::string GetSayString(){return std::string(say_string);}
+    std::string GetSayString() const {return std::string(say_string);}
 	 
     /** Returns a pointer to the model identified by name, or NULL if
 	it doesn't exist in this model. */
     Model* GetChild( const std::string& name ) const;
 
     /** return the update interval in usec */
-    usec_t GetInterval(){ return interval; }
+    usec_t GetInterval() const { return interval; }
 		
     class Visibility
     {
@@ -2721,7 +2720,6 @@ namespace Stg
   /// %ModelRanger class
   class ModelRanger : public Model
   {
-  public:
   public:
     ModelRanger( World* world, Model* parent, const std::string& type );
     virtual ~ModelRanger();
