@@ -16,6 +16,7 @@ set( stagepluginSrcs
 	     p_ranger.cc			 
 	     p_speech.cc
 	     p_graphics.cc
+	     p_localize.cc
 	     stg_time.cc
 )
 

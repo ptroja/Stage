@@ -36,13 +36,13 @@
 // CODE ----------------------------------------------------------------------
 
 #include "p_driver.h" 
-
+using namespace Stg;
 
 InterfaceLocalize::InterfaceLocalize( player_devaddr_t addr, 
 				StgDriver* driver,
 				ConfigFile* cf,
 				int section )
-  : InterfaceModel( addr, driver, cf, section, NULL )
+  : InterfaceModel( addr, driver, cf, section, "" )
 { 
 }
 
@@ -51,31 +51,81 @@ void InterfaceLocalize::Publish( void )
   player_localize_data_t loc;
   memset( &loc, 0, sizeof(loc));
 
-  Pose pose;
-  model_get_pose( this->mod, &pose );
+  Pose pose = this->mod->GetPose();
 
   // only 1 hypoth - it's the truth!
   loc.hypoths_count = 1;
-  loc.hypoths[0].mean.px = pose.x;
-  loc.hypoths[0].mean.py = pose.y;
-  loc.hypoths[0].mean.pa = pose.a;
+
+  player_localize_hypoth_t truth;
+
+  truth.mean.px = pose.x;
+  truth.mean.py = pose.y;
+  truth.mean.pa = pose.a;
+  for(int i = 0; i < 6; ++i)
+    truth.cov[i] = 0.0;
+  truth.alpha = 1.0;
+
+  loc.hypoths = &truth;
 
   // Write localize data
-  this->driver->Publish(this->addr, NULL,
+  this->driver->Publish(this->addr,
 			PLAYER_MSGTYPE_DATA,
 			PLAYER_LOCALIZE_DATA_HYPOTHS,
-			(void*)&loc, sizeof(loc), NULL);
+			(void*) &loc);
 }
 
 
-int InterfaceLocalize::ProcessMessage(MessageQueue* resp_queue,
+int InterfaceLocalize::ProcessMessage(QueuePointer & resp_queue,
 				      player_msghdr_t* hdr,
 				      void* data)
 {
+  // Is it a new motor command?
+  if(Message::MatchMessage(hdr, PLAYER_MSGTYPE_REQ,
+                           PLAYER_LOCALIZE_REQ_SET_POSE,
+                           this->addr))
+  {
+    // convert from Player to Stage format
+    player_localize_set_pose_t* cmd = (player_localize_set_pose_t*)data;
+
+    Pose pose;
+    pose.x = cmd->mean.px;
+    pose.y = cmd->mean.py;
+    pose.a = cmd->mean.pa;
+    this->mod->SetPose(pose);
+
+    this->driver->Publish( this->addr, resp_queue,
+                           PLAYER_MSGTYPE_RESP_ACK,
+                           PLAYER_LOCALIZE_REQ_SET_POSE);
+
+    return 0;
+  }
+
+  // Is it a new motor command?
+  if(Message::MatchMessage(hdr, PLAYER_MSGTYPE_REQ,
+                           PLAYER_LOCALIZE_REQ_GET_PARTICLES,
+                           this->addr))
+  {
+    player_localize_get_particles_t loc;
+
+    Pose pose = this->mod->GetPose();
+
+    loc.mean.px = pose.x;
+    loc.mean.py = pose.y;
+    loc.mean.pa = pose.a;
+    loc.particles_count = 0;
+    loc.variance = 0.0;
+
+    // Write localize data
+    this->driver->Publish(this->addr, resp_queue,
+  			PLAYER_MSGTYPE_RESP_ACK,
+  			PLAYER_LOCALIZE_REQ_GET_PARTICLES,
+  			(void*) &loc);
+
+    return 0;
+  }
+
   // Don't know how to handle this message.
   PRINT_WARN2( "stage localize doesn't support message %d:%d.",
 	       hdr->type, hdr->subtype);
   return(-1);
 }
-
-

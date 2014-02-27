@@ -452,11 +452,9 @@ StgDriver::StgDriver(ConfigFile* cf, int section)
 		ifsrc = new InterfaceGraphics3d( player_addr,  this, cf, section );
 		break;
 
-
-
-// 	case PLAYER_LOCALIZE_CODE:
-// 	  ifsrc = new InterfaceLocalize( player_addr,  this, cf, section );
-// 	  break;
+ 	case PLAYER_LOCALIZE_CODE:
+ 	  ifsrc = new InterfaceLocalize( player_addr,  this, cf, section );
+ 	  break;
 
 // 	case PLAYER_MAP_CODE:
 // 	  ifsrc = new InterfaceMap( player_addr,  this, cf, section );
