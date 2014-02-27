@@ -966,10 +966,14 @@ Model::RasterVis::RasterVis()
     width(0),
     height(0),
     cellwidth(0),
-    cellheight(0),
-    pts()
+    cellheight(0)
 {
   
+}
+
+Model::RasterVis::~RasterVis()
+{
+  if (data) delete [] data;
 }
 
 void Model::RasterVis::Visualize( Model* mod, Camera* cam ) 

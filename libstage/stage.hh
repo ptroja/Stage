@@ -1919,7 +1919,7 @@ namespace Stg
 	  
     public:
       RasterVis();
-      virtual ~RasterVis( void ){}
+      virtual ~RasterVis( void );
       virtual void Visualize( Model* mod, Camera* cam );
 	  
       void SetData( uint8_t* data, 
@@ -1928,8 +1928,8 @@ namespace Stg
 		    meters_t cellwidth,
 		    meters_t cellheight );
 	  
-      int subs;     //< the number of subscriptions to this model
-      int used;     //< the number of connections to this model
+      //int subs;     //< the number of subscriptions to this model
+      //int used;     //< the number of connections to this model
 	  
       void AddPoint( meters_t x, meters_t y );
       void ClearPts();
